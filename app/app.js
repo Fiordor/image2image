@@ -1,4 +1,10 @@
 const fs = require('fs');
+var ipc = require('electron').ipcRenderer;
+
+ipc.send('showOpenDialog');
+
+
+//console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }));
 
 /*Convert webp image to other image format
 const webp=require('webp-converter');
@@ -13,6 +19,7 @@ result.then((response) => {
 });
 */
 
+/*
 var webps = [];
 
 fs.readdir('./', (err, data) => {
@@ -38,3 +45,4 @@ fs.readdir('./', (err, data) => {
     });
 
 })
+*/
