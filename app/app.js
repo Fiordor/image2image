@@ -1,8 +1,15 @@
 const fs = require('fs');
 var ipc = require('electron').ipcRenderer;
 
-ipc.send('showOpenDialog');
+function comunicar() {
+    //poner a escuchar la respuesta
+    ipc.once('respuesta', function(event, data) {
+        console.log(data);
+    });
+    ipc.send('showOpenDialog');
+}
 
+comunicar();
 
 //console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }));
 

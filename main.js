@@ -40,9 +40,12 @@ app.whenReady().then(() => {
 app.on('window-all-closed', function () { if (process.platform !== 'darwin') app.quit() });
 
 
-ipc.on('showOpenDialog', function(event, data){
+ipc.on('showOpenDialog', function(event, data) {
     console.log('event', event);
     console.log('data', data);
 
     console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }));
+
+    //dar respuesta al metodo
+    event.sender.send('respuesta', 'hola');
 });
