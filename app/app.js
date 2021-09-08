@@ -1,15 +1,60 @@
 const fs = require('fs');
 var ipc = require('electron').ipcRenderer;
 
+var files = [];
+
 function comunicar() {
-    //poner a escuchar la respuesta
-    ipc.once('respuesta', function(event, data) {
-        console.log(data);
-    });
-    ipc.send('showOpenDialog');
+  //poner a escuchar la respuesta
+  ipc.once('respuesta', function (event, data) {
+    console.log(data);
+  });
+  ipc.send('showOpenDialog');
 }
 
-comunicar();
+//comunicar();
+
+document.addEventListener('drop', (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+
+  for (const f of event.dataTransfer.files) {
+    files = [];
+    files.push(f.path);
+  }
+});
+
+document.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+});
+
+//Drag encima de la ventana
+document.addEventListener('dragenter', (event) => {
+  console.log('File is in the Drop Space');
+});
+
+document.addEventListener('dragleave', (event) => {
+  console.log('File has left the Drop Space');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }));
 
