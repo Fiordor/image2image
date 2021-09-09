@@ -42,11 +42,10 @@ app.on('window-all-closed', function () { if (process.platform !== 'darwin') app
 
 
 ipc.on('showOpenDialog', function (event, data) {
-  console.log('event', event);
-  console.log('data', data);
 
-  console.log(dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }));
-
-  //dar respuesta al metodo
-  event.sender.send('respuesta', 'hola');
+  const getFiles = async () => {
+    const result = await dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] });
+    event.sender.send('showOpenDialog-result', result);
+  }
+  getFiles();
 });
