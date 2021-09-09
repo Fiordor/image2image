@@ -70,12 +70,11 @@ document.addEventListener('dragover', (e) => {
 
 //Drag encima de la ventana
 document.addEventListener('dragenter', (event) => {
-  let background = document.getElementById('drag-and-drop');
-  
+  //let background = document.getElementById('drag-and-drop');
 });
 //Drag sale de la ventana
 document.addEventListener('dragleave', (event) => {
-  let background = document.getElementById('drag-and-drop');
+  //let background = document.getElementById('drag-and-drop');
 });
 
 btFirstOpenFiles.onclick = (event) => { showOpenDialog(); }
