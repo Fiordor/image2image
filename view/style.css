@@ -54,13 +54,13 @@
 }
 
 .output-path {
-  width: max-content;
+  width: 162px;
   margin-right: 5px;
   font-size: 16px;
 }
 
 .output-type {
-  width: 35px;
+  width: 80px;
   font-size: 16px;
 }
 

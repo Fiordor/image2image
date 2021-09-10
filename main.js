@@ -49,3 +49,12 @@ ipc.on('showOpenDialog', function (event, data) {
   }
   getFiles();
 });
+
+ipc.on('showSaveOpenDialog', function (event, data) {
+
+  const getFiles = async () => {
+    const result = await dialog.showOpenDialog();
+    event.sender.send('showSaveOpenDialog-result', result);
+  }
+  getFiles();
+});

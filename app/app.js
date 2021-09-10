@@ -1,25 +1,21 @@
 const fs = require('fs');
 const ipc = require('electron').ipcRenderer;
+const funButtons = require('../app/funButtons.js');
 
-const btButtonOpen = document.getElementById('button-open');
-const btBackgroundNavbar = document.getElementById('background-navbar');
 const btFirstOpenFiles = document.getElementById('first-open-files');
+const slSelectTypes = document.getElementById('select-types');
 
+const imageTypes = [ 'png', 'webp' ];
 var files = [];
 
-const openNavbar = (event) => {
-  const NAVBAR_OPEN = 'navbar-open';
-  const BACKGROUND_OPEN = 'background-navbar-open';
-  const navbar = document.getElementsByClassName('navbar')[0].classList;
-  const background = document.getElementsByClassName('background-navbar')[0].classList;
-
-  if (navbar.contains(NAVBAR_OPEN)) {
-    navbar.remove(NAVBAR_OPEN);
-    background.remove(BACKGROUND_OPEN);
-  } else {
-    navbar.add(NAVBAR_OPEN);
-    background.add(BACKGROUND_OPEN);
-  }
+function main() {
+  
+  imageTypes.forEach(type => {
+    let option = document.createElement('option');
+    option.value = type;
+    option.innerText = type;
+    slSelectTypes.appendChild(option);
+  });
 }
 
 function updateImages(images) {
@@ -47,6 +43,13 @@ function showOpenDialog() {
     if (!data.canceled) { updateImages(data.filePaths); }
   });
   ipc.send('showOpenDialog');
+}
+
+function showSaveOpenDialog() {
+  ipc.once('showSaveOpenDialog-result', function (event, data) {
+    
+  });
+  ipc.send('showSaveOpenDialog');
 }
 
 document.addEventListener('drop', (event) => {
@@ -77,13 +80,13 @@ document.addEventListener('dragleave', (event) => {
   //let background = document.getElementById('drag-and-drop');
 });
 
-btFirstOpenFiles.onclick = (event) => { showOpenDialog(); }
+btFirstOpenFiles.addEventListener('click', (event) => { showOpenDialog(); });
+document.getElementById('button-open-from-navbar').addEventListener('click', (event) => { showOpenDialog(); });
 
-btBackgroundNavbar.onclick = openNavbar;
+document.getElementById('background-navbar').addEventListener('click', funButtons.openNavbar());
+document.getElementById('button-open').addEventListener('click', funButtons.openNavbar());
 
-btButtonOpen.onclick = openNavbar;
-
-
+main();
 
 
 
